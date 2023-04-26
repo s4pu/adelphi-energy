@@ -14,11 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import include, path
-
+from energy.energy_api.views import (StateViewSet)
 from rest_framework import routers
-from energy.api import views
+from energy.energy_api import views
 
 router = routers.DefaultRouter()
 router.register(r'States', views.StateViewSet)
@@ -26,7 +25,5 @@ router.register(r'States', views.StateViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('admin/', admin.site.urls),
+    path('api', views.StateViewSet, name='state'),
 ]

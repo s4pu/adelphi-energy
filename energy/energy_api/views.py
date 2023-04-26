@@ -1,9 +1,9 @@
 # from django.shortcuts import render
 
-from django.contrib.auth.models import User, Group
+from .models import State
 from rest_framework import viewsets
 from rest_framework import permissions
-from energy.api.serializers import StateSerializer
+from energy.energy_api.serializers import StateSerializer
 
 
 # class UserViewSet(viewsets.ModelViewSet):
@@ -19,6 +19,6 @@ class StateViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = Group.objects.all()
+    queryset = State.objects.all()
     serializer_class = StateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]

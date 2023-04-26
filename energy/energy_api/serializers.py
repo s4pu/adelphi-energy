@@ -1,10 +1,11 @@
-from django.contrib.auth.models import User, Group
+# from django.contrib.auth.models import User, Group
+from .models import State
 from rest_framework import serializers
 
 
 class StateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Group  # User
+        model = State
         fields = ['val', 'state']
 
 
