@@ -3,6 +3,37 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from energy.models import State
 from energy.serializers import StateSerializer
+from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import F
+
+
+class StateList(generics.ListAPIView):
+    queryset = State.objects.all()
+    serializer_class = StateSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['state']
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned states to a given state name,
+        by filtering against the `state` query parameter in the URL.
+        """
+        statename = self.request.query_params.get('state')
+        if statename is not None:
+            queryset = State.objects.filter(state=statename)
+        else:
+            queryset = State.objects.all()
+
+        # adjusted_queryset = []
+        # for state in queryset:
+        #     adjusted_state = {"yield": state.energy, "state": state.state}
+        #     adjusted_queryset.append(adjusted_state)
+        # newthing = queryset.values(
+        #     **{'yield': F('energy'), 'state2': F('state')})
+        # print(queryset)
+        # print(newthing)
+        return queryset
 
 
 def state_list(request):
@@ -23,12 +54,12 @@ def state_list(request):
         return JsonResponse(serializer.errors, status=400)
 
 
-def state_detail(request, pk):
+def state_detail(request, input):
     """
     Retrieve, update or delete a code state.
     """
     try:
-        state = State.objects.get(pk=pk)
+        state = State.objects.get(state=input)
     except State.DoesNotExist:
         return HttpResponse(status=404)
 

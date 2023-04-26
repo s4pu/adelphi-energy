@@ -14,8 +14,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='State',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('energy', models.IntegerField()),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('yield', models.IntegerField()),
                 ('state', models.CharField(default='', max_length=100)),
             ],
             options={

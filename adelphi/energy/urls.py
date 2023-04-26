@@ -1,7 +1,7 @@
-from django.urls import path
+from django.urls import path, re_path
 from energy import views
 
 urlpatterns = [
-    path('api/', views.state_list),
-    path('api/<int:pk>/', views.state_detail),
+    path('api/', views.StateList.as_view()),
+    path('api/pv_yield', views.StateList.as_view()),
 ]
