@@ -3,7 +3,7 @@ from .models import State
 
 
 class StateSerializer(serializers.Serializer):
-    # energy = serializers.IntegerField()
+    energy_yield = serializers.IntegerField()
     state = serializers.CharField(max_length=100)
 
     def create(self, validated_data):
@@ -16,11 +16,12 @@ class StateSerializer(serializers.Serializer):
         """
         Update and return an existing `State` instance, given the validated data.
         """
-        setattr(instance, "yield", validated_data.get(
-            'yield', getattr(instance, "yield")))
+        # setattr(instance, "yield", validated_data.get('yield', getattr(instance, "yield")))
+        instance.energy_yield = validated_data.get(
+            'energy_yield', instance.energy_yield)
         instance.state = validated_data.get('state', instance.state)
         instance.save()
         return instance
 
 
-setattr(StateSerializer, 'yield', serializers.IntegerField())
+# setattr(StateSerializer, 'yield', serializers.IntegerField())

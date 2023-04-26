@@ -1,5 +1,4 @@
 from django.http import HttpResponse, JsonResponse
-# from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from energy.models import State
 from energy.serializers import StateSerializer
@@ -24,15 +23,6 @@ class StateList(generics.ListAPIView):
             queryset = State.objects.filter(state=statename)
         else:
             queryset = State.objects.all()
-
-        # adjusted_queryset = []
-        # for state in queryset:
-        #     adjusted_state = {"yield": state.energy, "state": state.state}
-        #     adjusted_queryset.append(adjusted_state)
-        # newthing = queryset.values(
-        #     **{'yield': F('energy'), 'state2': F('state')})
-        # print(queryset)
-        # print(newthing)
         return queryset
 
 
