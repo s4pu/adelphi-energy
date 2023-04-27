@@ -7,6 +7,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import F
 
 
+def members(request):
+    return HttpResponse("Hello world!")
+
+
 class StateList(generics.ListAPIView):
     queryset = State.objects.all()
     serializer_class = StateSerializer
