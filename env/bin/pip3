@@ -1,4 +1,4 @@
-#!/home/leo/Documents/Bewerbung/adelphi-case-study/adelphi-energy/env/bin/python3
+#!/home/leo/Documents/Bewerbung/adelphi-case-study/adelphi-energy/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
