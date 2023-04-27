@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import State
+from collections import OrderedDict
 
 
 class StateSerializer(serializers.Serializer):
@@ -23,5 +24,15 @@ class StateSerializer(serializers.Serializer):
         instance.save()
         return instance
 
+    def to_representation(self, instance):
+        data = super(StateSerializer, self).to_representation(instance)
+        capacity = self.context.get('request').query_params.get('capacity')
+        if capacity is not None:
+            adjusted_yield = int(data.get('energy_yield')) * int(capacity)
+            data = OrderedDict(
+                energy_yield=adjusted_yield, state=data.get('state'))
+        data["yield"] = data.get('energy_yield')
+        del data["energy_yield"]
+        return data
 
 # setattr(StateSerializer, 'yield', serializers.IntegerField())
