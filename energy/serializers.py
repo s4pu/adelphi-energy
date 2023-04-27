@@ -31,8 +31,8 @@ class StateSerializer(serializers.Serializer):
             adjusted_yield = int(data.get('energy_yield')) * int(capacity)
             data = OrderedDict(
                 energy_yield=adjusted_yield, state=data.get('state'))
-        data["yield"] = data.get('energy_yield')
-        del data["energy_yield"]
+        # data["yield"] = data.get('energy_yield')
+        # del data["energy_yield"]
         return data
 
 # setattr(StateSerializer, 'yield', serializers.IntegerField())
