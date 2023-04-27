@@ -17,35 +17,35 @@ class StateList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['state']
 
-    def get_queryset(self):
-        """
-        Optionally restricts the returned states to a given state name,
-        by filtering against the `state` query parameter in the URL.
-        """
-        statename = self.request.query_params.get('state')
-        capacity = self.request.query_params.get('capacity')
-        if statename is not None:
-            queryset = State.objects.filter(state=statename)
-        else:
-            queryset = State.objects.all()
-        # if capacity is not None:
+    # def get_queryset(self):
+    #     """
+    #     Optionally restricts the returned states to a given state name,
+    #     by filtering against the `state` query parameter in the URL.
+    #     """
+    #     statename = self.request.query_params.get('state')
+    #     capacity = self.request.query_params.get('capacity')
+    #     if statename is not None:
+    #         queryset = State.objects.filter(state=statename)
+    #     else:
+    #         queryset = State.objects.all()
+    #     # if capacity is not None:
 
-            # print(1)
-            # def update_queryset(datum):
-            #     return {"energy_yield": datum.energy_yield * capacity, "state": datum.state}
-            # print(2)
-            # mapiterator = (update_queryset, queryset)
-            # print(3)
-            # new_queryset = set(mapiterator)
-            # print(new_queryset)
+    #         # print(1)
+    #         # def update_queryset(datum):
+    #         #     return {"energy_yield": datum.energy_yield * capacity, "state": datum.state}
+    #         # print(2)
+    #         # mapiterator = (update_queryset, queryset)
+    #         # print(3)
+    #         # new_queryset = set(mapiterator)
+    #         # print(new_queryset)
 
-            # new_queryset = []
-            # for d in queryset:
-            #     new_yield = d.energy_yield * capacity
-            #     new_d = {"energy_yield": new_yield, "state": d.state}
-            #     new_queryset.append(new_d)
-            #     return JsonResponse(new_d, safe=False)  # hier dann yield??
-        return queryset
+    #         # new_queryset = []
+    #         # for d in queryset:
+    #         #     new_yield = d.energy_yield * capacity
+    #         #     new_d = {"energy_yield": new_yield, "state": d.state}
+    #         #     new_queryset.append(new_d)
+    #         #     return JsonResponse(new_d, safe=False)  # hier dann yield??
+    #     return queryset
 
 
 def state_list(request):

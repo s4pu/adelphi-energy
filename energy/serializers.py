@@ -26,7 +26,10 @@ class StateSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
         data = super(StateSerializer, self).to_representation(instance)
-        capacity = self.context.get('request').query_params.get('capacity')
+        request = self.context.get('request')
+        if request is None:
+            return data
+        capacity = request.query_params.get('capacity')
         if capacity is not None:
             adjusted_yield = int(data.get('energy_yield')) * int(capacity)
             data = OrderedDict(
